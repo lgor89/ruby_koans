@@ -7,7 +7,7 @@ class DiceSet
 
   def roll(n)
       @values = (1..n).to_a.shuffle
-    end
+  end
 end
 
 class AboutDiceProject < Neo::Koan
