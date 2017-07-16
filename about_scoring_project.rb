@@ -32,10 +32,7 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 def score(dice)
   sum = 0
   ar = [0]
-  (1..6).each do |s|
-    a = dice.count(s)
-    ar[s] = a
-  end
+  (1..6).each{|s| ar[s] = dice.count(s)}
   one = { 1 => 100, 2 => 200, 3 => 1000, 4 => 1100, 5 => 1200 }
   one.each { |key, value| sum += value if key == ar[1] }
   case ar[2]
