@@ -14,25 +14,18 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  if ![a,b,c].include?(0)
-    array_of_conditions = [(a + b) > c, (b + c) > a, (a + c) > b]
-    miss = false if array_of_conditions.include?(false)
-    same_side = [a, b, c].find_all do |side|
-      side == a && side == b || side == c && side == b || side == a && side == c
-    end
-    return :isosceles if same_side.length == 2 && ( miss || miss == nil)
+  array_of_conditional = [(a+b)<=c,(b+c)<=a,(a+c)<=b]
+  sides = [a,b,c]
+  if array_of_conditional.include?(true)
+    raise TriangleError, 'Sum of two sides more then third ' if sides.each{|s| true if s>0}
+    raise TriangleError, 'Side must have any length ' if sides.include?(0)
+    raise TriangleError, 'Side length must be positive ' if sides.each{|s| true if s<0}
+  else
+    return :scalene if sides.uniq.length == 3
+    return :isosceles if sides.uniq.length == 2
+    return :equilateral if sides.uniq.length == 1
 
-   return :equilateral if [a,b,c].eql?([b,c,a])
   end
-    if [a,b,c].include?(0)
-    raise TriangleError, 'Side must have any length '
-    end
-  if a < 0 || b < 0 || c < 0
-    raise TriangleError, 'Side length must be positive '
-  elsif miss
-    return :scalene if  ![a,b,c].eql?([b,c,a]) && ![a,b,c].include?(0)
-  end
-   raise TriangleError, 'Sum of two sides more then third ' if !miss
 end
 
 # Error class used in part 2.  No need to change this code.
